@@ -70,15 +70,18 @@ const Nav = () => {
   </div>
   <div className="navbar-end">
     {
-      user ? <>
+      user ? <div className='flex items-center'>
 
-    <FaUserCircle className='text-4xl' />
+    <div className='flex  flex-col justify-center items-center mt-2'>
+    <img className='w-12 rounded-full' src={user.photoURL}></img>
+    <p className='font-bold text-xs'>{user.displayName}</p>
+    </div>
     <Link onClick={handleLogOut} className="btn ms-2 bg-[#403F3F] text-white">logOut</Link>
 
 
       
       
-      </>:
+      </div>:
 
    <>
 

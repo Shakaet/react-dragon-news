@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from './Provider';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { updateProfile } from 'firebase/auth';
+import auth from './firebase.init';
 
 const Register = () => {
     const { createNewUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [messages, setMessages] = useState([]);
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -16,43 +19,47 @@ const Register = () => {
         const password = e.target.password.value;
         const checkbox = e.target.checkbox.checked;
 
+        // Clear previous messages
+        setMessages([]);
+
         // Regular expressions
         const nameRegex = /^[a-zA-Z\s]+$/;
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
+        const newMessages = [];
+
         // Validations
         if (!name) {
-            toast.error("Name is required!");
-            return;
+            newMessages.push("Name is required!");
         } else if (!nameRegex.test(name)) {
-            toast.error("Name should only contain letters and spaces!");
-            return;
+            newMessages.push("Name should only contain letters and spaces!");
         }
 
         if (!photo) {
-            toast.error("Photo URL is required!");
-            return;
+            newMessages.push("Photo URL is required!");
         }
 
         if (!email) {
-            toast.error("Email is required!");
-            return;
+            newMessages.push("Email is required!");
         } else if (!emailRegex.test(email)) {
-            toast.error("Please enter a valid email address!");
-            return;
+            newMessages.push("Please enter a valid email address!");
         }
 
         if (!password) {
-            toast.error("Password is required!");
-            return;
+            newMessages.push("Password is required!");
         } else if (!passwordRegex.test(password)) {
-            toast.error("Password must contain at least 6 characters, including an uppercase letter, a lowercase letter, a number, and a special character!");
-            return;
+            newMessages.push("Password must contain at least 6 characters, including an uppercase letter, a lowercase letter, a number, and a special character!");
         }
 
         if (!checkbox) {
-            toast.error("Please accept the terms and conditions!");
+            newMessages.push("Please accept the terms and conditions!");
+        }
+
+        // If there are validation errors, display them
+        if (newMessages.length > 0) {
+            setMessages(newMessages);
+            newMessages.forEach((msg) => toast.error(msg));
             return;
         }
 
@@ -61,12 +68,21 @@ const Register = () => {
             .then((result) => {
                 console.log(result.user);
                 toast.success("Registration successful!");
+                updateProfile(auth.currentUser, {
+                    displayName: name, photoURL: photo
+                  }).then(() => {
+                    alert("updated Profile")
+                  }).catch((error) => {
+                     alert(error)
+                  });
                 
                 // Delay navigation slightly to allow toast message to display
                 setTimeout(() => navigate("/auth/login"), 1500);
             })
             .catch((error) => {
                 toast.error(error.message);
+                newMessages.push(error.message)
+                setMessages(newMessages)
             });
     };
 
@@ -124,6 +140,15 @@ const Register = () => {
                         </div>
                         <button className="w-full px-4 py-2 mt-4 text-white bg-black rounded-md">Register</button>
                     </form>
+                    
+                    {/* Display validation messages */}
+                    {messages.length > 0 && (
+                        <ul className="mt-4 text-sm text-red-500 list-disc list-inside">
+                            {messages.map((msg, index) => (
+                                <li key={index}>{msg}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
             <ToastContainer position="top-center" />
