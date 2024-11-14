@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaStar, FaShareAlt, FaEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const SpecificCategory = ({news}) => {
     return (
-        <div className='mt-10'>
+        <Link to={`/news/${news._id}`} className='mt-10'>
 
 <div className="p-4 border rounded-lg shadow-sm  mx-auto flex flex-col justify-center">
             {/* Header Section */}
@@ -58,7 +59,7 @@ const SpecificCategory = ({news}) => {
             </div>
         </div>
             
-        </div>
+        </Link>
     );
 };
 

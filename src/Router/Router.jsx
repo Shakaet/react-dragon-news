@@ -5,6 +5,7 @@ import {
   } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout";
 import CategoryNews from "../Components/CategoryNews";
+import SpecificNews from "../Components/SpecificNews";
 
 const Router = createBrowserRouter([
     {
@@ -24,8 +25,14 @@ const Router = createBrowserRouter([
       ]
     },
     {
-        path: "/news",
-        element: <div>News Component</div>,
+        path: "/news/:news_id",
+        element: <SpecificNews></SpecificNews>,
+        loader: async ({ params }) => {
+          // Fetch specific news data based on `news_id`
+          const response = await fetch(`https://openapi.programming-hero.com/api/news/${params.news_id}`);
+          const data = await response.json();
+          return data; // Returns data to `useLoaderData`
+        },
     },
 
     {
