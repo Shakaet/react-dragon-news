@@ -49,11 +49,11 @@ const SpecificCategory = ({news}) => {
                     {[...Array(5)].map((_, i) => (
                         <FaStar key={i} />
                     ))}
-                    <span className="text-gray-700 ml-2 text-sm">4.9</span>
+                    <span className="text-gray-700 ml-2 text-sm">{news.rating.number}</span>
                 </div>
                 <div className="flex items-center text-gray-500">
                     <FaEye />
-                    <span className="ml-1 text-sm">499</span>
+                    <span className="ml-1 text-sm">{news.total_view}</span>
                 </div>
             </div>
         </div>
