@@ -9,11 +9,12 @@ import SpecificNews from "../Components/SpecificNews";
 import Auth from "../layout/Auth";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import PrivateRoute from "../Components/PrivateRoute";
 
 const Router = createBrowserRouter([
     {
       path: "/",
-      element: <HomeLayout></HomeLayout>,
+      element:<PrivateRoute><HomeLayout></HomeLayout></PrivateRoute>,
       children:[
         {
              path:"/",
@@ -29,7 +30,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/news/:news_id",
-        element: <SpecificNews></SpecificNews>,
+        element: <PrivateRoute><SpecificNews></SpecificNews></PrivateRoute>,
         loader: async ({ params }) => 
           // Fetch specific news data based on `news_id`
            fetch(`https://openapi.programming-hero.com/api/news/${params.news_id}`)

@@ -10,18 +10,25 @@ const Provider = ({children}) => {
 
     let [user,setUser]= useState(null)
 
+    let [loading,setLoading]=useState(true)
+
+
+
 
 
 
     let createNewUser=(email,password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     let loginUser=(email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
 
     let UserLogOut=()=>{
+        setLoading(true)
         return signOut(auth)
           
     }
@@ -35,6 +42,7 @@ const Provider = ({children}) => {
           // ...
         }
         setUser(currentUser)
+        setLoading(false)
 
         return ()=>{
             unsubscribe()
@@ -46,7 +54,8 @@ const Provider = ({children}) => {
         createNewUser,
         loginUser,
         user,
-        UserLogOut
+        UserLogOut,
+        loading
     }
     return (
         <AuthContext.Provider value={value}>
