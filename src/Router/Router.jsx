@@ -6,6 +6,9 @@ import {
 import HomeLayout from "../layout/HomeLayout";
 import CategoryNews from "../Components/CategoryNews";
 import SpecificNews from "../Components/SpecificNews";
+import Auth from "../layout/Auth";
+import Login from "../Components/Login";
+import Register from "../Components/Register";
 
 const Router = createBrowserRouter([
     {
@@ -27,17 +30,25 @@ const Router = createBrowserRouter([
     {
         path: "/news/:news_id",
         element: <SpecificNews></SpecificNews>,
-        loader: async ({ params }) => {
+        loader: async ({ params }) => 
           // Fetch specific news data based on `news_id`
-          const response = await fetch(`https://openapi.programming-hero.com/api/news/${params.news_id}`);
-          const data = await response.json();
-          return data; // Returns data to `useLoaderData`
-        },
+           fetch(`https://openapi.programming-hero.com/api/news/${params.news_id}`)
+         
     },
 
     {
-        path: "/login",
-        element: <div>login Component</div>,
+        path: "/auth",
+        element: <Auth></Auth>,
+        children:[
+          {
+            path:"/auth/login",
+            element:<Login></Login>
+          },
+          {
+            path:"/auth/register",
+            element:<Register></Register>
+          }
+        ]
     },
     {
         path: "*",

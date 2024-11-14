@@ -1,8 +1,26 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa'
+import { AuthContext } from './Provider';
 
 const Nav = () => {
+
+  let {user,UserLogOut}= useContext(AuthContext)
+
+  let linkage=useNavigate()
+
+
+  let handleLogOut=()=>{
+    UserLogOut()
+    .then(()=>{
+      alert("signOut Successful")
+      linkage("/auth/login")
+
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
     let link =<>
 
@@ -20,6 +38,8 @@ const Nav = () => {
 
 <div className="navbar bg-base-100 mt-10">
   <div className="navbar-start">
+
+    <h2>Email: {user?.email}</h2>
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg
@@ -49,8 +69,28 @@ const Nav = () => {
     </ul>
   </div>
   <div className="navbar-end">
-  <FaUserCircle className='text-4xl' />
-    <a className="btn ms-2 bg-[#403F3F] text-white">login</a>
+    {
+      user ? <>
+
+    <FaUserCircle className='text-4xl' />
+    <Link onClick={handleLogOut} className="btn ms-2 bg-[#403F3F] text-white">logOut</Link>
+
+
+      
+      
+      </>:
+
+   <>
+
+      <FaUserCircle className='text-4xl' />
+      <Link to="/auth/login" className="btn ms-2 bg-[#403F3F] text-white">login</Link>
+
+
+   </>
+
+
+    }
+ 
   </div>
 </div>
             
