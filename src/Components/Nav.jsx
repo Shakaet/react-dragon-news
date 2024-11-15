@@ -36,7 +36,7 @@ const Nav = () => {
         <div>
 
 
-<div className="navbar bg-base-100 mt-10">
+<div className="md:navbar bg-base-100 mt-10">
   <div className="navbar-start">
 
     <h2>Email: {user?.email}</h2>
@@ -70,26 +70,26 @@ const Nav = () => {
   </div>
   <div className="navbar-end">
     {
-      user ? <div className='flex items-center'>
+      user ? <div className='md:flex items-center gap-5'>
 
-    <div className='flex  flex-col justify-center items-center mt-2'>
+    <div className='md:flex md:flex-col justify-center items-center mt-2'>
     <img className='w-12 rounded-full' src={user.photoURL}></img>
     <p className='font-bold text-xs'>{user.displayName}</p>
     </div>
-    <Link onClick={handleLogOut} className="btn ms-2 bg-[#403F3F] text-white">logOut</Link>
+    <Link onClick={handleLogOut} className="btn ms-2 bg-[#403F3F] text-white mt-5">logOut</Link>
 
 
       
       
       </div>:
 
-   <>
+   <div className='flex  items-center'>
 
       <FaUserCircle className='text-4xl' />
       <Link to="/auth/login" className="btn ms-2 bg-[#403F3F] text-white">login</Link>
 
 
-   </>
+   </div>
 
 
     }

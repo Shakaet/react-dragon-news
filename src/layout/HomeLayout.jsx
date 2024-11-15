@@ -27,19 +27,19 @@ const HomeLayout = () => {
             <main className='container mx-auto mt-10 '>
 
               <div className='md:flex gap-5'>
-              <aside className='w-3/12'>
+              <aside className='md:w-3/12'>
                     <h2>
                         <LeftA></LeftA>
                     </h2>
                 </aside>
 
-                <section className='w-6/12'>
+                <section className='md:w-6/12'>
 
                 <Outlet></Outlet>
 
                 </section>
 
-                <aside className='w-3/12'>
+                <aside className='md:w-3/12'>
 
                 <RightA></RightA>
 

@@ -6,7 +6,7 @@ const SpecificCategory = ({news}) => {
     return (
         <Link to={`/news/${news._id}`} className='mt-10'>
 
-<div className="p-4 border rounded-lg shadow-sm  mx-auto flex flex-col justify-center">
+<div className="p-4 border rounded-lg shadow-sm mx-auto flex flex-col justify-center">
             {/* Header Section */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center">

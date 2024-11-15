@@ -59,7 +59,7 @@ const SpecificNews = () => {
 <div className='md:flex gap-5'>
 
 
-  <section className='w-8/12'>
+  <section className='md:w-8/12'>
 
   <div className=" mx-auto bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
             <img
@@ -83,7 +83,7 @@ const SpecificNews = () => {
 
   </section>
 
-  <aside className='w-4/12'>
+  <aside className='md:w-4/12'>
 
      <RightA></RightA>
 
