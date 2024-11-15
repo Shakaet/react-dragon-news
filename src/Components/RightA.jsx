@@ -1,20 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IoLogoGoogle } from "react-icons/io";
 import { IoLogoGithub } from "react-icons/io";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { AuthContext } from './Provider';
 
 const RightA = () => {
+
+    let {handleGoogleSignIn,githubSignIn}=useContext(AuthContext)
+
+    let handleGithub=()=>{
+        githubSignIn()
+        .then((result) => {
+
+            console.log(result)
+            alert("githubSignInSuccesfully")
+            
+          }).catch((error) => {
+            console.log(error)
+           
+          });
+    }
+    
+    let handleGoogle=()=>{
+        handleGoogleSignIn()
+  .then((result) => {
+
+    console.log(result)
+    alert("goggleSignInSuccesfully")
+    
+  }).catch((error) => {
+    console.log(error)
+   
+  });
+    }
     return (
         <div>
             <h2 className='font-bold  text-3xl'>login with</h2>
 
             <div className='mt-8'>
            
-               <button className='btn btn-outline w-full h-auto border-2 border-[blue]'><span className='text-2xl'><IoLogoGoogle /></span>Login with Google</button>
+               <button onClick={handleGoogle} className='btn btn-outline w-full h-auto border-2 border-[blue]'><span className='text-2xl'><IoLogoGoogle /></span>Login with Google</button>
              
-                <button  className=' btn btn-outline mt-5 w-full h-auto border-2 border-[red]'><span className='text-2xl'><IoLogoGithub />
+                <button onClick={handleGithub}  className=' btn btn-outline mt-5 w-full h-auto border-2 border-[red]'><span className='text-2xl'><IoLogoGithub />
                 </span>
                 Login with Github</button>
             </div>
