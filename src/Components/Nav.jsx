@@ -18,7 +18,7 @@ const Nav = () => {
 
     })
     .catch((error)=>{
-      console.log(error)
+      // console.log(error)
     })
   }
 

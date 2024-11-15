@@ -6,7 +6,7 @@ import SpecificCategory from './SpecificCategory';
 const CategoryNews = () => {
 
     let {data}= useLoaderData()
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             <h2 className='text-3xl font-bold ms-5'>Dragon News Home</h2>

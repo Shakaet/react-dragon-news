@@ -15,11 +15,9 @@ const Login = () => {
 
         loginUser(email, password)
             .then(result => {
-                console.log(result.user);
+                navigate("/")
+                // console.log(result.user);
                 toast.success("Login Successful!");
-
-                // Delay navigation to allow the toast to be visible
-                setTimeout(() => navigate("/"), 1500);
             })
             .catch(error => {
                 toast.error(error.message);

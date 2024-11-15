@@ -37,7 +37,7 @@ const SpecificNews = () => {
   const newsItem = newsData?.data?.[0];
   
   useEffect(() => {
-    console.log(newsItem._id);
+    // console.log(newsItem._id);
 }, [newsItem]);
 
     return (

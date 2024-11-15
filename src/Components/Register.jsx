@@ -66,7 +66,7 @@ const Register = () => {
         // Registration
         createNewUser(email, password)
             .then((result) => {
-                console.log(result.user);
+                // console.log(result.user);
                 toast.success("Registration successful!");
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photo
@@ -77,7 +77,7 @@ const Register = () => {
                   });
                 
                 // Delay navigation slightly to allow toast message to display
-                setTimeout(() => navigate("/auth/login"), 1500);
+                setTimeout(() => navigate("/"), 1500);
             })
             .catch((error) => {
                 toast.error(error.message);
