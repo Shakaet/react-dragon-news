@@ -3,7 +3,7 @@ import icon from '../assets/logo.png'
 
 import RightA from './RightA';
 
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 
 const SpecificNews = () => {
 
@@ -11,6 +11,8 @@ const SpecificNews = () => {
 
     
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+    
 
     
 
@@ -73,9 +75,9 @@ const SpecificNews = () => {
                 <p className="text-gray-700 mb-6">
                    {newsItem.details}
                    </p>
-                <button className="btn btn-error">
+                <Link to="/" className="btn btn-error">
                     ← All news in this category
-                </button>
+                </Link>
             </div>
         </div>
 
